@@ -7,6 +7,7 @@ import {
   IconButton,
   Fade,
   CircularProgress,
+  InputAdornment
 } from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
 import { connect } from 'react-redux';
@@ -17,7 +18,7 @@ import UsersTable from './HomeComponents/Users';
 import { GetClientTable } from './Reducers/ClientReducer';
 import { GetCasesTable } from './Reducers/CasesReducer';
 import { GetUsersTable } from './Reducers/UsersReducer';
-
+import KeyboardArrowRightIcon from '@material-ui/icons/KeyboardArrowRight';
 import {
   BrowserRouter as Router,
   Route,
@@ -91,9 +92,9 @@ function HomePage(props) {
   }
 
   return (
-    <div>
+    <>
       <Router>
-        <Grid container spacing={1}>
+        <Grid container spacing={1} className="mainContainer">
           <Grid
             item
             xs={3}
@@ -124,22 +125,23 @@ function HomePage(props) {
                   </Grid>
                   <Grid item className="leftsidebarOptions">
                     <Link to="/home/clients" className="homeLink">
-                      <Button onClick={getdata} className="sideBarBtn">
-                        Clients
+                      <Button onClick={getdata} className="sideBarBtn" endAdornment={}>
+                        Clients<KeyboardArrowRightIcon fontSize="small" className="sidebarRightIcon"/>
+                        
                       </Button>
                     </Link>
                   </Grid>
                   <Grid item className="leftsidebarOptions">
                     <Link to="/home/cases" className="homeLink">
                       <Button onClick={getCases} className="sideBarBtn">
-                        Cases
+                        Cases<KeyboardArrowRightIcon fontSize="small" className="sidebarRightIcon"/>
                       </Button>
                     </Link>
                   </Grid>
                   <Grid item className="leftsidebarOptions">
                     <Link to="/home/users" className="homeLink">
                       <Button onClick={getUsers} className="sideBarBtn">
-                        Users
+                        Users<KeyboardArrowRightIcon fontSize="small" className="sidebarRightIcon"/>
                       </Button>
                     </Link>
                   </Grid>
@@ -192,7 +194,7 @@ function HomePage(props) {
           </Grid>
         </Grid>
       </Router>
-    </div>
+    </>
   );
 }
 

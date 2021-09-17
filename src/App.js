@@ -29,7 +29,7 @@ function App(props) {
   }
   if (redirect) {
     return (
-      <div>
+      <>
       <Router>
         <Route exact path="/home" children={<HomePage />} />
         <Redirect to="/home" />
@@ -44,11 +44,11 @@ function App(props) {
             Successfly Logged
           </MuiAlert>
         </Snackbar>
-      </div>
+      </>
     );
   } else {
     return (
-      <div>
+      <>
         <Router>
           <Switch>
             <Route exact path="/login" children={<LoginPage />} />
@@ -67,7 +67,7 @@ function App(props) {
             Sign In Failed
           </MuiAlert>
         </Snackbar>
-      </div>
+      </>
     );
   }
 }
