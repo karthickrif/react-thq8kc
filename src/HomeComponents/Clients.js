@@ -13,15 +13,13 @@ import {
   IconButton,
   CircularProgress,
 } from '@material-ui/core';
-import GetUserTable from '../Reducers/Reducer';
 import { connect } from 'react-redux';
-import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
-import DeleteOutlineIcon from '@material-ui/icons/DeleteOutline';
-import EditOutlinedIcon from '@material-ui/icons/EditOutlined';
-import { reduxForm, Field } from 'redux-form';
 import ClientForm from '../Forms/ClientForm';
-import { appendClientData, removeClientData, editClientData } from '../Action';
 import { ModifyClient } from '../Reducers/ClientReducer';
+import EditOutlinedIcon from '@material-ui/icons/EditOutlined';
+import DeleteOutlineIcon from '@material-ui/icons/DeleteOutline';
+import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
+import { appendClientData, removeClientData, editClientData } from '../Action';
 
 function ClientsTable(props) {
   const { dispatch, data, sessionData, clientData } = props;

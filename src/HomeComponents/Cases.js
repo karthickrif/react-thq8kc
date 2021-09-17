@@ -14,12 +14,12 @@ import {
   CircularProgress,
 } from '@material-ui/core';
 import { connect } from 'react-redux';
-import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
-import DeleteOutlineIcon from '@material-ui/icons/DeleteOutline';
-import EditOutlinedIcon from '@material-ui/icons/EditOutlined';
 import CasesForm from '../Forms/CasesForm';
-import { appendCasesData, removeCasesData, editCasesData } from '../Action';
 import { ModifyCases } from '../Reducers/CasesReducer';
+import EditOutlinedIcon from '@material-ui/icons/EditOutlined';
+import DeleteOutlineIcon from '@material-ui/icons/DeleteOutline';
+import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
+import { appendCasesData, removeCasesData, editCasesData } from '../Action';
 
 function CasesTable(props) {
   const { dispatch, data, sessionData, casesData } = props;

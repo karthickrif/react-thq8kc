@@ -9,15 +9,14 @@ import {
   CircularProgress,
   InputAdornment
 } from '@material-ui/core';
-import MenuIcon from '@material-ui/icons/Menu';
 import { connect } from 'react-redux';
-var logo;
-import ClientsTable from './HomeComponents/Clients';
+import MenuIcon from '@material-ui/icons/Menu';
 import CasesTable from './HomeComponents/Cases';
 import UsersTable from './HomeComponents/Users';
-import { GetClientTable } from './Reducers/ClientReducer';
-import { GetCasesTable } from './Reducers/CasesReducer';
+import ClientsTable from './HomeComponents/Clients';
 import { GetUsersTable } from './Reducers/UsersReducer';
+import { GetCasesTable } from './Reducers/CasesReducer';
+import { GetClientTable } from './Reducers/ClientReducer';
 import KeyboardArrowRightIcon from '@material-ui/icons/KeyboardArrowRight';
 import {
   BrowserRouter as Router,
@@ -27,7 +26,7 @@ import {
   Switch,
   Redirect,
 } from 'react-router-dom';
-
+var logo;
 function HomePage(props) {
   const { dispatch, data, sessionData } = props;
   const [logo, setLogo] = useState({
@@ -188,8 +187,6 @@ function HomePage(props) {
               <Route exact path="/home/clients" children={<ClientsTable />} />
               <Route exact path="/home/cases" children={<CasesTable />} />
               <Route exact path="/home/users" children={<UsersTable />} />
-              {/* <Route exact path="/home/cases" children={<CasesTable/>} />
-          <Route exact path="/home/users" children={<UsersTable/>} /> */}
             </Switch>
           </Grid>
         </Grid>

@@ -1,5 +1,3 @@
-import { getClientData, getCasesData, getUsersData } from '../Action';
-import axios from 'axios';
 const initialState = {
   loginData: {}
 };

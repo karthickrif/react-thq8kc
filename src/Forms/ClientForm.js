@@ -10,11 +10,9 @@ const validate = values => {
   } else if (values.name.match('^[a-zA-Z ]*$') == null) {
     errors.name = 'Name fields contain only Alphabets';
   }
-
   if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
     errors.email = 'Enter a valid Email';
   }
-
   if (!values.phone) {
     errors.phone = 'Required';
   } else if (values.phone.match('^[0-9]*$') == null) {
@@ -168,6 +166,5 @@ ClientForm = connect(
 export default reduxForm({
   form: 'clientForm',
   validate,
-  // asyncValidate,
   asyncBlurFields: ['firstName']
 })(ClientForm);

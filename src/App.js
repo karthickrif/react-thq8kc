@@ -6,14 +6,12 @@ import { connect } from 'react-redux';
 import {
   BrowserRouter as Router,
   Route,
-  NavLink,
-  Link,
   Switch,
   Redirect
 } from 'react-router-dom';
-import ClientsTable from './HomeComponents/Clients';
 import { Snackbar } from '@material-ui/core';
 import MuiAlert from '@material-ui/lab/Alert';
+import ClientsTable from './HomeComponents/Clients';
 var route;
 var snack;
 function App(props) {
@@ -34,12 +32,7 @@ function App(props) {
         <Route exact path="/home" children={<HomePage />} />
         <Redirect to="/home" />
       </Router>
-      <Snackbar
-          open={authStatus != undefined && authStatus == 'success' && redirect}
-          autoHideDuration={5000}
-          anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
-          onClose={handleClose}
-        >
+      <Snackbar open={authStatus != undefined && authStatus == 'success' && redirect}          autoHideDuration={5000} anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}      onClose={handleClose}>
           <MuiAlert severity="success" elevation={6} variant="filled">
             Successfly Logged
           </MuiAlert>
@@ -57,12 +50,7 @@ function App(props) {
             <Route exact path="/home/clients" children={<ClientsTable />} />
           </Switch>
         </Router>
-        <Snackbar
-          open={authStatus != undefined && authStatus == 'failed' && !redirect}
-          autoHideDuration={5000}
-          anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
-          onClose={handleClose}
-        >
+        <Snackbar open={authStatus != undefined && authStatus == 'failed' && !redirect}         autoHideDuration={5000} anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}     onClose={handleClose}>
           <MuiAlert severity="error" elevation={6} variant="filled">
             Sign In Failed
           </MuiAlert>

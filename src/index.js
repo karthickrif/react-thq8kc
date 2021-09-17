@@ -1,17 +1,16 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import { createStore, applyMiddleware, combineReducers } from 'redux';
-import { Provider } from 'react-redux';
-import LoginReducer from './Reducers/Reducer';
-import ClientReducer from './Reducers/ClientReducer';
-import CasesReducer from './Reducers/CasesReducer';
-import UsersReducer from './Reducers/UsersReducer';
 import App from './App';
-import createSagaMiddleware from 'redux-saga';
-import { rootSaga } from './Sagas/Saga';
+import React from 'react';
 import thunk from 'redux-thunk';
+import ReactDOM from 'react-dom';
+import { Provider } from 'react-redux';
+import { rootSaga } from './Sagas/Saga';
+import createSagaMiddleware from 'redux-saga';
+import LoginReducer from './Reducers/Reducer';
+import UsersReducer from './Reducers/UsersReducer';
+import CasesReducer from './Reducers/CasesReducer';
 import { reducer as formReducer } from 'redux-form';
-import ClientForm from './Forms/ClientForm';
+import ClientReducer from './Reducers/ClientReducer';
+import { createStore, applyMiddleware, combineReducers } from 'redux';
 
 const rootReducer = combineReducers({
   LoginReducer,

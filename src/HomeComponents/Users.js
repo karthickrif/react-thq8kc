@@ -14,12 +14,12 @@ import {
   CircularProgress
 } from '@material-ui/core';
 import { connect } from 'react-redux';
-import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
-import DeleteOutlineIcon from '@material-ui/icons/DeleteOutline';
-import EditOutlinedIcon from '@material-ui/icons/EditOutlined';
 import UsersForm from '../Forms/UsersForm';
-import { appendUserData, removeUserData, editUserData } from '../Action';
 import  {ModifyUser} from '../Reducers/UsersReducer';
+import EditOutlinedIcon from '@material-ui/icons/EditOutlined';
+import DeleteOutlineIcon from '@material-ui/icons/DeleteOutline';
+import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
+import { appendUserData, removeUserData, editUserData } from '../Action';
 
 function UsersTable(props) {
   const { dispatch, data, sessionData, usersData } = props;

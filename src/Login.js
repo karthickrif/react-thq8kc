@@ -9,10 +9,10 @@ import {
   Button,
   CircularProgress,
 } from '@material-ui/core';
-import MailOutline from '@material-ui/icons/MailOutline';
-import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import { connect } from 'react-redux';
 import { GetLoginData } from './Action';
+import MailOutline from '@material-ui/icons/MailOutline';
+import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 
 function LoginPage(props) {
   const [loginData, setLoginData] = useState({
