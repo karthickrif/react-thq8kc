@@ -89,7 +89,7 @@ function ClientsTable(props) {
   }
   setTimeout(()=>{
     setdelayRow(true);
-  },2000)
+  },3000)
   return (
     <TableContainer component={Paper} className="DataTable">
       <Table>
