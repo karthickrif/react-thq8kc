@@ -25,6 +25,7 @@ function CasesTable(props) {
   const { dispatch, data, sessionData, casesData } = props;
   const [dialogStatus, setDialogStatus] = useState({ status: false });
   const [progStatus, setProgStatus] = useState(false);
+  const [delayRow, setdelayRow] = useState(false);
 
   const handleOpen = () => {
     setDialogStatus({ status: true, editStatus: false });
@@ -85,6 +86,9 @@ function CasesTable(props) {
     });
   }
 
+  setTimeout(()=>{
+    setdelayRow(true);
+  },2000)
   return (
     <TableContainer component={Paper} className="DataTable">
       <Table>
@@ -139,13 +143,7 @@ function CasesTable(props) {
                 </TableCell>
               </TableRow>
             ))
-          ) : (
-            <TableRow>
-              <TableCell align="center" colSpan={10}>
-                <div>Oops! No Record Found</div>
-              </TableCell>
-            </TableRow>
-          )}
+          ) : delayRow == true ? <TableRow><TableCell align="center" colSpan={10}><div>Oops! No Record Found</div> </TableCell></TableRow> : ''}
           <Dialog open={dialogStatus.status} onClose={handleClose}>
             <DialogTitle>
               {dialogStatus.editStatus == true ? 'Edit Case' : 'Add Case'}

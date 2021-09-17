@@ -28,6 +28,7 @@ function UsersTable(props) {
     editStatus: false
   });
   const [progStatus, setProgStatus] = useState(false);
+  const [delayRow, setdelayRow] = useState(false);
 
   const handleOpen = () => {
     setDialogStatus({ status: true, editStatus: false });
@@ -88,6 +89,9 @@ function UsersTable(props) {
     });
   }
 
+  setTimeout(()=>{
+    setdelayRow(true);
+  },2000)
   return (
     <TableContainer component={Paper} className="DataTable">
       <Table>
@@ -129,7 +133,7 @@ function UsersTable(props) {
                   </TableCell>
                 </TableRow>
               ))
-            : <TableRow><TableCell align="center" colSpan={7}><div>Oops! No Record Found</div></TableCell></TableRow>}
+            :  delayRow == true ? <TableRow><TableCell align="center" colSpan={7}><div>Oops! No Record Found</div> </TableCell></TableRow> : ''}
           <Dialog open={dialogStatus.status} onClose={handleClose}>
             <DialogTitle>
               {dialogStatus.editStatus == true ? 'Edit User' : 'Add User'}

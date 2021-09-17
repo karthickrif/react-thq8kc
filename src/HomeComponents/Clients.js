@@ -22,13 +22,13 @@ import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
 import { appendClientData, removeClientData, editClientData } from '../Action';
 
 function ClientsTable(props) {
-  const { dispatch, data, sessionData, clientData } = props;
+  const { dispatch, data, sessionData, clientData} = props;
   const [dialogStatus, setDialogStatus] = useState({
     status: false,
     editStatus: false,
   });
   const [progStatus, setProgStatus] = useState(false);
-
+  const [delayRow, setdelayRow] = useState(false);
   const handleOpen = () => {
     setDialogStatus({ status: true, editStatus: false });
   };
@@ -87,7 +87,9 @@ function ClientsTable(props) {
       editStatus: false,
     });
   }
-
+  setTimeout(()=>{
+    setdelayRow(true);
+  },2000)
   return (
     <TableContainer component={Paper} className="DataTable">
       <Table>
@@ -104,35 +106,39 @@ function ClientsTable(props) {
               </IconButton>
             </TableCell>
             <TableCell align="left">
-              {progStatus == false ? '' : <CircularProgress className="tableProgress"/>}
+              {progStatus == false ? (
+                ''
+              ) : (
+                <CircularProgress className="tableProgress" />
+              )}
             </TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
-          {clientData != undefined && clientData.length > 0
-            ? clientData.map((values, index) => (
-                <TableRow key={index}>
-                  <TableCell align="left">{values.name}</TableCell>
-                  <TableCell align="left">{values.email}</TableCell>
-                  <TableCell align="left">{values.phone}</TableCell>
-                  <TableCell align="left">{values.address}</TableCell>
-                  <TableCell align="left">{values.dob}</TableCell>
-                  <TableCell align="left">
-                    <IconButton id={index} onClick={() => handleEdit(index)}>
-                      <EditOutlinedIcon />
-                    </IconButton>
-                  </TableCell>
-                  <TableCell align="left">
-                    <IconButton
-                      id={index}
-                      onClick={() => handleDelete(values.id)}
-                    >
-                      <DeleteOutlineIcon />
-                    </IconButton>
-                  </TableCell>
-                </TableRow>
-              ))
-            : <TableRow><TableCell align="center" colSpan={7}><div>Oops! No Record Found</div></TableCell></TableRow>}
+          {clientData != undefined && clientData.length > 0 ? (
+            clientData.map((values, index) => (
+              <TableRow key={index}>
+                <TableCell align="left">{values.name}</TableCell>
+                <TableCell align="left">{values.email}</TableCell>
+                <TableCell align="left">{values.phone}</TableCell>
+                <TableCell align="left">{values.address}</TableCell>
+                <TableCell align="left">{values.dob}</TableCell>
+                <TableCell align="left">
+                  <IconButton id={index} onClick={() => handleEdit(index)}>
+                    <EditOutlinedIcon />
+                  </IconButton>
+                </TableCell>
+                <TableCell align="left">
+                  <IconButton
+                    id={index}
+                    onClick={() => handleDelete(values.id)}
+                  >
+                    <DeleteOutlineIcon />
+                  </IconButton>
+                </TableCell>
+              </TableRow>
+            ))
+          ) : delayRow == true ? <TableRow><TableCell align="center" colSpan={7}><div>Oops! No Record Found</div> </TableCell></TableRow> : ''}
           <Dialog open={dialogStatus.status} onClose={handleClose}>
             <DialogTitle>
               {dialogStatus.editStatus == true ? 'Edit Client' : 'Add Client'}
@@ -163,5 +169,4 @@ const mapDispatchToProps = (dispatch) => {
     dispatch,
   };
 };
-
 export default connect(mapStateToProps, mapDispatchToProps)(ClientsTable);
