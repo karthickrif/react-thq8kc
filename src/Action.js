@@ -95,7 +95,7 @@ export function editUserData(val, index,status) {
   return {
     type: 'EditUserData',
     value: val,
-    clientId: index,
+    userId: index,
     status : status,
   };
 }

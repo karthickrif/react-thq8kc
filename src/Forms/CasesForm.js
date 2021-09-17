@@ -72,7 +72,7 @@ function CasesForm(props) {
               <option>Select Any</option>
               {casesData != undefined && casesData.length > 0 ? (
                 casesData.map((values) => (
-                  <option value={values.client_id}>{values.client_name}</option>
+                  <option value={values.client_id}>{values.client_name != undefined ? values.client_name : "Default"}</option>
                 ))
               ) : (
                 <option value="29f3a9f3-c568-4713-89c3-95b835b9f3dc">
@@ -102,7 +102,6 @@ function CasesForm(props) {
             name="claim_number"
             component={renderField}
             type="text"
-            placeholder="Downtown lane,CA"
           />
         </div>
 

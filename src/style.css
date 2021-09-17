@@ -153,6 +153,14 @@ select {
   display: block !important;
   text-align: left !important;
 }
+.home_toolbar {
+  justify-content: space-between;
+}
+.home_tableProgress{
+  color: #fff !important;
+  width: 25px !important;
+  height: 25px !important;
+}
 @media screen and (max-width: 767px) {
   .login_Card {
     padding: 50px 20px;

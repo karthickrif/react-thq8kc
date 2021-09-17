@@ -2,13 +2,11 @@ import React, { useState, useEffect } from 'react';
 import {
   Grid,
   Button,
-  Menu,
-  MenuItem,
   AppBar,
   Toolbar,
   IconButton,
-  Hidden,
-  Fade
+  Fade,
+  CircularProgress,
 } from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
 import { connect } from 'react-redux';
@@ -16,9 +14,9 @@ var logo;
 import ClientsTable from './HomeComponents/Clients';
 import CasesTable from './HomeComponents/Cases';
 import UsersTable from './HomeComponents/Users';
-import  {GetClientTable} from './Reducers/ClientReducer';
-import  {GetCasesTable} from './Reducers/CasesReducer';
-import  {GetUsersTable} from './Reducers/UsersReducer';
+import { GetClientTable } from './Reducers/ClientReducer';
+import { GetCasesTable } from './Reducers/CasesReducer';
+import { GetUsersTable } from './Reducers/UsersReducer';
 
 import {
   BrowserRouter as Router,
@@ -26,7 +24,7 @@ import {
   NavLink,
   Link,
   Switch,
-  Redirect
+  Redirect,
 } from 'react-router-dom';
 
 function HomePage(props) {
@@ -35,13 +33,14 @@ function HomePage(props) {
     img: '',
     clientcount: 0,
     casescount: 0,
-    userscount: 0
+    userscount: 0,
   });
   const [fade, setFade] = useState({
     value: true,
     gridWidth: 9,
-    navWidth: 'displayClass'
+    navWidth: 'displayClass',
   });
+  const [progStatus, setProgStatus] = useState(false);
 
   function getdata() {
     if (logo.clientcount == 0) {
@@ -51,8 +50,10 @@ function HomePage(props) {
       img: logo.img,
       clientcount: 1,
       casescount: logo.casescount,
-      userscount: logo.userscount
+      userscount: logo.userscount,
     });
+    setProgStatus(true);
+    setTimeout(() => setProgStatus(false), 2000);
   }
   function getCases() {
     if (logo.casescount == 0) {
@@ -62,8 +63,10 @@ function HomePage(props) {
       img: logo.img,
       clientcount: logo.clientcount,
       casescount: 1,
-      userscount: logo.userscount
+      userscount: logo.userscount,
     });
+    setProgStatus(true);
+    setTimeout(() => setProgStatus(false), 2000);
   }
   function getUsers() {
     if (logo.userscount == 0) {
@@ -73,8 +76,10 @@ function HomePage(props) {
       img: logo.img,
       clientcount: logo.clientcount,
       casescount: logo.casescount,
-      userscount: 1
+      userscount: 1,
     });
+    setProgStatus(true);
+    setTimeout(() => setProgStatus(false), 2000);
   }
 
   function handleFade() {
@@ -119,17 +124,23 @@ function HomePage(props) {
                   </Grid>
                   <Grid item className="leftsidebarOptions">
                     <Link to="/home/clients" className="homeLink">
-                      <Button onClick={getdata}className="sideBarBtn">Clients</Button>
+                      <Button onClick={getdata} className="sideBarBtn">
+                        Clients
+                      </Button>
                     </Link>
                   </Grid>
                   <Grid item className="leftsidebarOptions">
                     <Link to="/home/cases" className="homeLink">
-                      <Button onClick={getCases} className="sideBarBtn">Cases</Button>
+                      <Button onClick={getCases} className="sideBarBtn">
+                        Cases
+                      </Button>
                     </Link>
                   </Grid>
                   <Grid item className="leftsidebarOptions">
                     <Link to="/home/users" className="homeLink">
-                      <Button onClick={getUsers} className="sideBarBtn">Users</Button>
+                      <Button onClick={getUsers} className="sideBarBtn">
+                        Users
+                      </Button>
                     </Link>
                   </Grid>
                 </div>
@@ -146,7 +157,7 @@ function HomePage(props) {
             className="gridClass"
           >
             <AppBar position="static" className="home_navBar">
-              <Toolbar variant="dense">
+              <Toolbar variant="dense" className="home_toolbar">
                 <IconButton
                   edge="start"
                   color="inherit"
@@ -155,6 +166,11 @@ function HomePage(props) {
                 >
                   <MenuIcon />
                 </IconButton>
+                {progStatus == false ? (
+                  ''
+                ) : (
+                  <CircularProgress className="home_tableProgress" />
+                )}
               </Toolbar>
             </AppBar>
             <div className="GreetUser">
@@ -180,20 +196,17 @@ function HomePage(props) {
   );
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
     data: state.LoginReducer && state.LoginReducer.loginData,
-    sessionData: state.LoginReducer && state.LoginReducer.sessionData
+    sessionData: state.LoginReducer && state.LoginReducer.sessionData,
   };
 };
 
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch) => {
   return {
-    dispatch
+    dispatch,
   };
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(HomePage);
+export default connect(mapStateToProps, mapDispatchToProps)(HomePage);
