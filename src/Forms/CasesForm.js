@@ -3,7 +3,7 @@ import { reduxForm, Field } from 'redux-form';
 import '../style.css';
 import { connect } from 'react-redux';
 
-const validate = values => {
+const validate = (values) => {
   const errors = {};
   if (!values.client_id) {
     errors.client_id = 'Required';
@@ -28,7 +28,7 @@ const renderField = ({
   label,
   type,
   placeholder,
-  meta: { asyncValidating, touched, error, warning }
+  meta: { asyncValidating, touched, error, warning },
 }) => {
   return (
     <div>
@@ -39,7 +39,8 @@ const renderField = ({
         placeholder={placeholder}
       />
       {touched &&
-        ((error && <div className="error">{error}</div>) || (warning && <span>{warning}</span>))}
+        ((error && <div className="error">{error}</div>) ||
+          (warning && <span>{warning}</span>))}
     </div>
   );
 };
@@ -49,12 +50,12 @@ const renderSelectField = ({
   label,
   type,
   meta: { touched, error },
-  children
+  children,
 }) => (
   <div>
     <div>
       <select {...input}>{children}</select>
-      {touched && error &&<div className="error">{error}</div>}
+      {touched && error && <div className="error">{error}</div>}
     </div>
   </div>
 );
@@ -65,30 +66,38 @@ function CasesForm(props) {
     <form onSubmit={handleSubmit}>
       <div className="input_area">
         <div className="name">
-        <div className="compart">
+          <div className="compart">
             <label htmlFor="clientID">Client ID</label>
             <Field name="client_id" type="input" component={renderSelectField}>
               <option>Select Any</option>
-              {casesData != undefined ? casesData.map(values => <option value={values.client_id}>{values.client_id}</option>) : <option value="29f3a9f3-c568-4713-89c3-95b835b9f3dc">Default</option>}
+              {casesData != undefined && casesData.length > 0 ? (
+                casesData.map((values) => (
+                  <option value={values.client_id}>{values.client_name}</option>
+                ))
+              ) : (
+                <option value="29f3a9f3-c568-4713-89c3-95b835b9f3dc">
+                  Default
+                </option>
+              )}
             </Field>
           </div>
         </div>
 
         <div className="compart">
           <label htmlFor="case_title">Case Title</label>
-          
+
           <Field name="case_title" component={renderField} type="text" />
         </div>
 
         <div className="compart">
           <label htmlFor="case_number">Case Number</label>
-          
+
           <Field name="case_number" component={renderField} type="text" />
         </div>
 
         <div className="compart">
           <label>Claim Number</label>
-          
+
           <Field
             name="claim_number"
             component={renderField}
@@ -99,9 +108,8 @@ function CasesForm(props) {
 
         <div className="compart">
           <label htmlFor="matter_id">Matter ID</label>
-          
+
           <Field name="matter_id" type="text" component={renderField} />
-          
         </div>
 
         <div className="compart">
@@ -125,10 +133,18 @@ function CasesForm(props) {
         </div>
       </div>
       <div className="button_area">
-        <button className="FormButtons" type="submit" disabled={pristine || submitting}>
+        <button
+          className="FormButtons"
+          type="submit"
+          disabled={pristine || submitting}
+        >
           Submit
         </button>
-        <button className="FormButtons" disabled={pristine || submitting} onClick={reset}>
+        <button
+          className="FormButtons"
+          disabled={pristine || submitting}
+          onClick={reset}
+        >
           Reset
         </button>
       </div>
@@ -136,26 +152,23 @@ function CasesForm(props) {
   );
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
     data: state.LoginReducer && state.LoginReducer.loginData,
     sessionData: state.LoginReducer && state.LoginReducer.sessionData,
-    casesData: state.ClientReducer && state.ClientReducer.casesData
+    casesData: state.CasesReducer && state.CasesReducer.casesData,
   };
 };
 
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch) => {
   return {
-    dispatch
+    dispatch,
   };
 };
 
-CasesForm = connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(CasesForm);
+CasesForm = connect(mapStateToProps, mapDispatchToProps)(CasesForm);
 
 export default reduxForm({
   form: 'casesForm',
-  validate
+  validate,
 })(CasesForm);
