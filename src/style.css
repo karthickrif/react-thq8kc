@@ -8,9 +8,9 @@ body,
 .mainContainer {
   height: 100%;
 }
-::-webkit-scrollbar {
+/* ::-webkit-scrollbar {
   display: none;
-}
+} */
 .login_Card {
   padding: 50px;
 }
